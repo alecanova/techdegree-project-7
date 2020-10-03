@@ -6,6 +6,21 @@ import { withRouter } from "react-router"; //withRouter will pass updated match 
 
 class PhotoContainer extends Component {
 
+    // If (current url parameter !== previous url parameter) {fetch new data} else do not
+    componentDidUpdate () {
+
+        if (this.props.match.params.query !== this.props.query) {
+            this.props.performSearch(this.props.match.params.query)
+        } else if (this.props.loading) {
+            this.props.handleLoadingState(false)
+        }
+    }
+
+    componentDidMount () {
+
+        this.props.performSearch(this.props.match.params.query);
+
+    }
 
     render() {
 
