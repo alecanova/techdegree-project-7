@@ -31,6 +31,9 @@ class App extends Component  {
 
   } 
 
+  handleLoadingState = (boolean = true) => this.setState({ loading: boolean });
+
+
   /* Fetching Data with Axios */
   componentDidMount () {
     this.performSearch();
@@ -65,9 +68,11 @@ class App extends Component  {
 
         <Switch>
           <Route path='/search/:query' render={ () => <PhotoContainer 
+                                                          performSearch={this.performSearch}
                                                           photos={this.state.photos}
                                                           query={this.state.query}
                                                           loading={this.state.loading}
+                                                          handleLoadingState={this.handleLoadingState}
                                                       /> } />
           <Route path='/' render={ () => <NotFound />} />
         </Switch>
