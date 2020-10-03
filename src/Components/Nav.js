@@ -1,18 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Nav = () => (
+const Nav = ( {handleLoadingState} ) => (
 
     <nav className="main-nav">
         <ul>
           <li>
-            <NavLink to='/search/cats' onClick{} >Cats</NavLink>
+            <NavLink to='/search/guitar' onClick={handleLoadingState} >Guitar</NavLink>
           </li>
           <li>
-            <NavLink to='/search/cats' onClick{} >Cats</NavLink>
+            <NavLink to='/search/bass' onClick={handleLoadingState} >Bass</NavLink>
           </li>
           <li>
-            <NavLink to='/search/cats' onClick{} >Cats</NavLink>
+            <NavLink to='/search/drums' onClick={handleLoadingState} >Drums</NavLink>
           </li>
         </ul>
     </nav>
