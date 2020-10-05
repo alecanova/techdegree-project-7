@@ -31,7 +31,7 @@ class App extends Component  {
 
 
 
-  loadingStatus = () => {
+  handleLoading = () => {
 
     this.setState({ loading: true});
 
@@ -44,7 +44,7 @@ class App extends Component  {
   performSearch = query => {
 
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-      .then( this.loadingStatus() )
+      .then( this.handleLoading() )
       .then(response => {
         this.setState({
           photos: response.data.photos.photo,
@@ -62,7 +62,7 @@ class App extends Component  {
   fetchGuitar = (query = 'guitar') => {
 
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-      .then( this.loadingStatus() )
+      .then( this.handleLoading() )
       .then(response => {
         this.setState({
           guitar: response.data.photos.photo,
@@ -78,7 +78,7 @@ class App extends Component  {
   fetchBass = (query = 'bass') => {
 
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-      .then( this.loadingStatus() )
+      .then( this.handleLoading() )
       .then(response => {
         this.setState({
           bass: response.data.photos.photo,
@@ -94,7 +94,7 @@ class App extends Component  {
   fetchDrums = (query = 'drums') => {
 
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-      .then( this.loadingStatus() )
+      .then( this.handleLoading() )
       .then(response => {
         this.setState({
           drums: response.data.photos.photo,
@@ -125,7 +125,7 @@ class App extends Component  {
               <Route exact path="/bass" render={ () => <PhotoContainer photos={this.state.bass} query='bass' /> } />
               <Route exact path="/drums" render={ () => <PhotoContainer photos={this.state.drums} query='drums' /> } />
               <Route exact path="/search:query" render={ () => <PhotoContainer photos={this.state.photos} query={this.state.query} loading={this.state.loading} /> } />
-
+              <Route component={NotFound} />
             </Switch> 
         }   
       </HashRouter>
