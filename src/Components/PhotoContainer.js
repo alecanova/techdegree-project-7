@@ -1,57 +1,48 @@
 import React, { Component } from 'react';
+
 import Photo from './Photo';
 import NotFound from './NotFound';
-import { withRouter } from "react-router"; //withRouter will pass updated match and history props to the wrapped component whenever it renders.
 
 
 class PhotoContainer extends Component {
 
-    // If (current url parameter !== previous url parameter) {fetch new data} else do not
-    componentDidUpdate () {
+    render () {
 
-        if (this.props.match.params.query !== this.props.query) {
-            this.props.performSearch(this.props.match.params.query)
-        } else if (this.props.loading) {
-            this.props.handleLoadingState(false)
-        }
-    }
-
-    componentDidMount () {
-
-        this.props.performSearch(this.props.match.params.query);
-
-    }
-
-    render() {
-
-        // store the data in a costant
-        const results = this.props.photos
+        const results = this.props.photos;
+        const query = this.props.query;
         let photos;
 
-        if(results.length > 0) {
-
-            // return a Photo component (<Photo/>) from each objecy of the array.
-            photos = results.map( photo => { <Photo photo={photo} key={photo.id} /> })
-
+        if (results.length > 0) {
+            // return a Photo component (<Photo/>) from each objecy of the array
+            photos = results.map( photo => <Photo 
+                                                farm={photo.farm}
+                                                server={photo.server}
+                                                id={photo.id}
+                                                secret={photo.secret}
+                                                key={photo.id}
+                                            />
+            )
         } else {
-
             photos = <NotFound />
-
         }
 
         return (
 
-            <div class="photo-container">
-                <h2>Results</h2>
-                    <ul>
-                        {photos}
-                    </ul>
+            <div className="photo-container">
+                <h2>Here some photo of {query}</h2>
+                <ul>
+                    {
+                        (this.props.loading)
+                        ? <p>Loading...</p>
+                        : photos
+                    } 
+                </ul>
             </div>
 
         );
- 
+        
     }
 
 }
 
-export default withRouter(PhotoContainer);
+export default PhotoContainer;
