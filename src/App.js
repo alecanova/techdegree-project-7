@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import './App.css';
 import {
-  HashRouter,
+  BrowserRouter,
   Route,
   Switch,
   Redirect
 } from 'react-router-dom';
 import axios from 'axios';
 import api_key from './config';
-import './App.css';
 
 // Components
 import SearchForm from './Components/SearchForm';
@@ -21,11 +21,10 @@ import NotFound from './Components/NotFound';
 class App extends Component  {
 
     state = {
-      photos: [],
-      guitar: [],
-      bass: [],
-      drums: [],
-      query: '',
+      books: [],
+      movies: [],
+      records: [],
+      searchPhoto: [],
       loading: true
     };
 
@@ -37,98 +36,78 @@ class App extends Component  {
 
   }
 
+  componentDidMount () {
+
+    this.performSearch();
+    this.performSearch('books');
+    this.performSearch('movies');
+    this.performSearch('records');
+
+  }
+
 
 /******* FETCHING DATA WITH AXIOS ********/
   
-  // Fetching data for SearchForm
-  performSearch = query => {
+  performSearch = (query = 'books') => {
 
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then( this.handleLoading() )
       .then(response => {
-        this.setState({
-          photos: response.data.photos.photo,
-          query: query,
-          loading: false
-        });
+
+        if (query === 'books') {
+          this.setState({
+            books: response.data.photos.photo,
+            loading: false
+          });
+
+        } else if (query === 'movies') {
+          this.setState({
+            movies: response.data.photos.photo,
+            loading: false
+          });
+
+        } else if (query === 'records') {
+          this.setState({
+            records: response.data.photos.photo,
+            loading: false
+          });
+
+        } else {
+          this.setState({
+            searchPhoto: response.data.photos.photo,
+            loading: false
+          });
+        }
       })
+
       .catch(error => {
         console.log('Error fetching and parsing data', error);
       });
 
   };
-
-  // Fetching data for Navlinks
-  fetchGuitar = (query = 'guitar') => {
-
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-      .then( this.handleLoading() )
-      .then(response => {
-        this.setState({
-          guitar: response.data.photos.photo,
-          loading: false
-        });
-      })
-      .catch(error => {
-        console.log('Error fetching and parsing data', error);
-      });
-
-  }
-
-  fetchBass = (query = 'bass') => {
-
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-      .then( this.handleLoading() )
-      .then(response => {
-        this.setState({
-          bass: response.data.photos.photo,
-          loading: false
-        });
-      })
-      .catch(error => {
-        console.log('Error fetching and parsing data', error);
-      });
-
-  }
-
-  fetchDrums = (query = 'drums') => {
-
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-      .then( this.handleLoading() )
-      .then(response => {
-        this.setState({
-          drums: response.data.photos.photo,
-          loading: false
-        });
-      })
-      .catch(error => {
-        console.log('Error fetching and parsing data', error);
-      });
-
-  }
   
   render () {
 
     return (
 
-      <HashRouter>
+      <BrowserRouter>
         <div className='container'>
-          <SearchForm query={this.state.query} onSearch={this.performSearch} photos={this.state.photos}/> 
+          <SearchForm onSearch={this.performSearch} /> 
           <Nav />
+          {
+            (this.state.loading)
+            ? <p>Loading...</p>
+            : <Switch>
+                <Route exact path="/" render={ () => <Redirect to="/books" /> } />
+                <Route path="/books" render={ () => <PhotoContainer data={this.state.books}  /> } />
+                <Route path="/movies" render={ () => <PhotoContainer data={this.state.movies}  /> } />
+                <Route path="/records" render={ () => <PhotoContainer data={this.state.records}  /> } />
+                <Route path="/search:query" render={ () => <PhotoContainer data={this.state.searchPhoto} /> } />
+                <Route component={NotFound} />
+              </Switch> 
+          }   
         </div>
-        {
-          (this.state.loading)
-          ? <p>Loading...</p>
-          : <Switch>
-              <Route exact path="/" render={ () => <Redirect to='/guitar' /> } />
-              <Route exact path="/guitar" render={ () => <PhotoContainer photos={this.state.guitar} query='guitar' /> } />
-              <Route exact path="/bass" render={ () => <PhotoContainer photos={this.state.bass} query='bass' /> } />
-              <Route exact path="/drums" render={ () => <PhotoContainer photos={this.state.drums} query='drums' /> } />
-              <Route exact path="/search:query" render={ () => <PhotoContainer photos={this.state.photos} query={this.state.query} loading={this.state.loading} /> } />
-              <Route component={NotFound} />
-            </Switch> 
-        }   
-      </HashRouter>
+      </BrowserRouter>
 
     );
 
