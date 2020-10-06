@@ -3,16 +3,16 @@ import { NavLink } from 'react-router-dom';
 
 const Nav = () => (
 
-    <nav className="main-nav">
+    <nav className= "main-nav">
         <ul>
           <li>
-            <NavLink to='/guitar'>Guitar</NavLink>
+            <NavLink to='/books'>Books</NavLink>
           </li>
           <li>
-            <NavLink to='/bass'>Bass</NavLink>
+            <NavLink to='/movies'>Movies</NavLink>
           </li>
           <li>
-            <NavLink to='/drums'>Drums</NavLink>
+            <NavLink to='/records'>Records</NavLink>
           </li>
         </ul>
     </nav>
