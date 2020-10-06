@@ -8,7 +8,7 @@ class PhotoContainer extends Component {
 
     render () {
 
-        const results = this.props.photos;
+        const results = this.props.data;
         const query = this.props.query;
         let photos;
 
@@ -28,8 +28,8 @@ class PhotoContainer extends Component {
 
         return (
 
-            <div className="photo-container">
-                <h2>Here some photo of {query}</h2>
+            <div className= "photo-container">
+                <h2>{query}</h2>
                 <ul>
                     {
                         (this.props.loading)
