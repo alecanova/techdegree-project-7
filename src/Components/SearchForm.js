@@ -17,10 +17,10 @@ class SearchForm extends Component {
     handleSubmit = e => {
 
         e.preventDefault();
-        const searchQuery = this.query.value;
-        const path = `/search/${searchQuery}`;
+        let searchQuery = this.query.value;
+        let path = `/search/${searchQuery}`;
         this.props.history.push(path);
-        this.props.onSearch(this.query.value);
+        this.props.onSearch(searchQuery);
         e.currentTarget.reset();
 
     }
@@ -29,7 +29,7 @@ class SearchForm extends Component {
 
         return (
             
-            <form className="search-form" onSubmit={this.handleSubmit} >
+            <form className= "search-form" onSubmit={this.handleSubmit} >
                 <input 
                     type="search"
                     onChange={this.onSearchChange}
