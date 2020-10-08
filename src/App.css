@@ -37,10 +37,20 @@
   }
 }
 
+html {
+  background-image:  url("fruity.jpg");
+}
+
 body {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
   color: #3f4850;
+}
+
+h3, p {
+  color: whitesmoke;
+  font-size: 4em;
+  font-family: Andale Mono, monospace;
 }
 
 h2 {
@@ -66,7 +76,7 @@ a {
 
 .search-form button {
   outline: none;
-  background-color: #438bbd;
+  background-color: #e99b36;
   border: none;
   padding: 0px 15px;
   border-radius: 0 0.35em 0.35em 0;
@@ -91,7 +101,7 @@ input {
 
 .main-nav a {
   display: block;
-  background: #438bbd;
+  background: #e99b36;
   border-radius: 3px;
   padding: 5px;
   color: #fff;
@@ -100,7 +110,8 @@ input {
 .main-nav .active,
 .main-nav a:hover,
 .search-form button:hover {
-  background-color: #275270;
+  background-color: #3693e9;
+ 
 }
 
 .photo-container ul {
