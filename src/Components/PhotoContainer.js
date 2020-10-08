@@ -33,7 +33,7 @@ class PhotoContainer extends Component {
                 <ul>
                     {
                         (this.props.loading)
-                        ? <p>Loading...</p>
+                        ? <h2>Loading...</h2>
                         : photos
                     } 
                 </ul>
