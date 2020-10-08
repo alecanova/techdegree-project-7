@@ -48,7 +48,7 @@ class App extends Component  {
 
 /******* FETCHING DATA WITH AXIOS ********/
   
-  performSearch = (query = 'books') => {
+  performSearch = (query) => {
 
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${api_key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then( this.handleLoading() )
@@ -102,7 +102,7 @@ class App extends Component  {
                 <Route path="/books" render={ () => <PhotoContainer data={this.state.books}  /> } />
                 <Route path="/movies" render={ () => <PhotoContainer data={this.state.movies}  /> } />
                 <Route path="/records" render={ () => <PhotoContainer data={this.state.records}  /> } />
-                <Route path="/search:query" render={ () => <PhotoContainer data={this.state.searchPhoto} /> } />
+                <Route path="/:query" render={ () => <PhotoContainer data={this.state.searchPhoto} /> } />
                 <Route component={NotFound} />
               </Switch> 
           }   
