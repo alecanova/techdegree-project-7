@@ -21,9 +21,9 @@ import NotFound from './Components/NotFound';
 class App extends Component  {
 
     state = {
-      books: [],
-      movies: [],
-      records: [],
+      avocado: [],
+      papaya: [],
+      mango: [],
       searchPhoto: [],
       loading: true
     };
@@ -39,9 +39,9 @@ class App extends Component  {
   componentDidMount () {
 
     this.performSearch();
-    this.performSearch('books');
-    this.performSearch('movies');
-    this.performSearch('records');
+    this.performSearch('avocado');
+    this.performSearch('papaya');
+    this.performSearch('mango');
 
   }
 
@@ -54,21 +54,21 @@ class App extends Component  {
       .then( this.handleLoading() )
       .then(response => {
 
-        if (query === 'books') {
+        if (query === 'avocado') {
           this.setState({
-            books: response.data.photos.photo,
+            avocado: response.data.photos.photo,
             loading: false
           });
 
-        } else if (query === 'movies') {
+        } else if (query === 'papaya') {
           this.setState({
-            movies: response.data.photos.photo,
+            papaya: response.data.photos.photo,
             loading: false
           });
 
-        } else if (query === 'records') {
+        } else if (query === 'mango') {
           this.setState({
-            records: response.data.photos.photo,
+            mango: response.data.photos.photo,
             loading: false
           });
 
@@ -98,10 +98,10 @@ class App extends Component  {
             (this.state.loading)
             ? <p>Loading...</p>
             : <Switch>
-                <Route exact path="/" render={ () => <Redirect to="/books" /> } />
-                <Route path="/books" render={ () => <PhotoContainer data={this.state.books}  /> } />
-                <Route path="/movies" render={ () => <PhotoContainer data={this.state.movies}  /> } />
-                <Route path="/records" render={ () => <PhotoContainer data={this.state.records}  /> } />
+                <Route exact path="/" render={ () => <Redirect to="/avocado" /> } />
+                <Route path="/avocado" render={ () => <PhotoContainer data={this.state.avocado}  /> } />
+                <Route path="/papaya" render={ () => <PhotoContainer data={this.state.papaya}  /> } />
+                <Route path="/mango" render={ () => <PhotoContainer data={this.state.mango}  /> } />
                 <Route path="/:query" render={ () => <PhotoContainer data={this.state.searchPhoto} /> } />
                 <Route component={NotFound} />
               </Switch> 
