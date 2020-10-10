@@ -13,8 +13,7 @@ import api_key from './config';
 import SearchForm from './Components/SearchForm';
 import Nav from './Components/Nav';
 import PhotoContainer from './Components/PhotoContainer';
-import NotFound from './Components/NotFound';
-
+import ErrorPage from './Components/ErrorPage';
 
 
 
@@ -103,7 +102,7 @@ class App extends Component  {
                 <Route path="/papaya" render={ () => <PhotoContainer data={this.state.papaya}  /> } />
                 <Route path="/mango" render={ () => <PhotoContainer data={this.state.mango}  /> } />
                 <Route path="/:query" render={ () => <PhotoContainer data={this.state.searchPhoto} /> } />
-                <Route component={NotFound} />
+                <Route component={ErrorPage} />
               </Switch> 
           }   
         </div>
