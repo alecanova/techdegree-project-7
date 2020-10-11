@@ -1,4 +1,11 @@
+CSS modifications:
+
+- background-image and backgorund color
+- Color palette for active links
+- Text shadows
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
