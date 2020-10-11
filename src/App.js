@@ -101,7 +101,7 @@ class App extends Component  {
                 <Route path="/avocado" render={ () => <PhotoContainer data={this.state.avocado}  /> } />
                 <Route path="/papaya" render={ () => <PhotoContainer data={this.state.papaya}  /> } />
                 <Route path="/mango" render={ () => <PhotoContainer data={this.state.mango}  /> } />
-                <Route path="/:query" render={ () => <PhotoContainer data={this.state.searchPhoto} /> } />
+                <Route path="/search/:query" render={ () => <PhotoContainer data={this.state.searchPhoto} /> } />
                 <Route component={ErrorPage} />
               </Switch> 
           }   
