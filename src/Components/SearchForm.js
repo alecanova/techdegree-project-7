@@ -18,7 +18,7 @@ class SearchForm extends Component {
 
         e.preventDefault();
         let searchQuery = this.query.value;
-        let path = `/${searchQuery}`;
+        let path = `/search/${searchQuery}`;
         this.props.history.push(path);
         this.props.onSearch(searchQuery);
         e.currentTarget.reset();
