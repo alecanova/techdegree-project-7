@@ -51,12 +51,14 @@ h3, p {
   color: whitesmoke;
   font-size: 4em;
   font-family: Andale Mono, monospace;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 h2 {
   font-size: 2em;
   margin: 52px 0 40px;
   text-transform: capitalize;
+  text-shadow: -1px 0 whitesmoke, 0 1px whitesmoke, 1px 0 whitesmoke, 0 -1px whitesmoke;
 }
 
 ul {
@@ -142,6 +144,12 @@ input {
 .photo-container .not-found {
   width: 100%;
 }
+
+.home {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: orange;
+}
+
 
 @media only screen and (max-width: 767px)  {
   body {
